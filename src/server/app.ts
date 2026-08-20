@@ -24,9 +24,9 @@ import {
   getSettings, 
   updateSettings,
   upsertDiscordUser
-} from '../db/repository.ts';
-import { INITIAL_GAMEMODES } from './mockStore.ts';
-import { sendDiscordLog } from './discordLogger.ts';
+} from '../db/repository';
+import { INITIAL_GAMEMODES } from './mockStore';
+import { sendDiscordLog } from './discordLogger';
 import {
   buildDiscordAuthorizeUrl,
   generateOAuthState,
@@ -37,7 +37,7 @@ import {
   verifySession,
   SESSION_COOKIE_NAME,
   SESSION_COOKIE_OPTIONS
-} from './discordAuth.ts';
+} from './discordAuth';
 
 export const app = express();
 

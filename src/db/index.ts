@@ -1,7 +1,7 @@
 import { Pool, neonConfig } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
 import ws from 'ws';
-import * as schema from './schema.ts';
+import * as schema from './schema';
 import { 
   INITIAL_PLAYERS, 
   INITIAL_APPLICATIONS, 
@@ -9,7 +9,7 @@ import {
   INITIAL_STAFF, 
   INITIAL_ANNOUNCEMENTS, 
   INITIAL_LOGS 
-} from '../server/mockStore.ts';
+} from '../server/mockStore';
 import { eq } from 'drizzle-orm';
 
 if (typeof window === 'undefined') {
