@@ -1,4 +1,4 @@
-import { getSettings } from '../db/repository';
+import { getSettings } from '../db/repository.ts';
 
 export interface DiscordEmbedField {
   name: string;

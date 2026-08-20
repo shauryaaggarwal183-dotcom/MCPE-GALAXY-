@@ -1,4 +1,4 @@
-import { db, initializeDatabase } from './index';
+import { db, initializeDatabase } from './index.ts';
 import { 
   players, 
   tierHistory, 
@@ -11,7 +11,7 @@ import {
   auditLogs, 
   systemSettings,
   discordUsers
-} from './schema';
+} from './schema.ts';
 import { eq, desc, and, like, or } from 'drizzle-orm';
 import { 
   Player, 
@@ -27,7 +27,7 @@ import {
   StaffRole,
   MinecraftEdition,
   DiscordUser
-} from '../types/index';
+} from '../types/index.ts';
 import { 
   INITIAL_PLAYERS, 
   INITIAL_APPLICATIONS, 
@@ -36,7 +36,7 @@ import {
   INITIAL_ANNOUNCEMENTS, 
   INITIAL_LOGS,
   INITIAL_GAMEMODES 
-} from '../server/mockStore';
+} from '../server/mockStore.ts';
 
 // In-memory fallback stores if PostgreSQL database is not connected
 let memoryPlayers: Player[] = [...INITIAL_PLAYERS];

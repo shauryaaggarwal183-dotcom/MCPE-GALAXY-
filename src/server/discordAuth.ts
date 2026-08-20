@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
-import { DiscordUser } from '../types/index';
+import { DiscordUser } from '../types/index.ts';
 
 const DISCORD_API = 'https://discord.com/api/v10';
 
