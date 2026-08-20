@@ -1,0 +1,6 @@
+{
+  "name": "MCPE Galaxy",
+  "description": "Premier Minecraft Bedrock Tier Testing & Competitive Esports Ecosystem with live queues, player profiles, staff management, and leaderboards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
