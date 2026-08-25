@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MCPE GALAXY - Premium PvP testing server for Java & Bedrock. Tier rankings, live leaderboards, elite gameplay.">
+  <title>MCPE GALAXY | PvP Testing Server</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/g8o468o.png">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0a0a0f;
+      color: #e0e0e0;
+      overflow: hidden;
+      height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: rgba(155,89,182,0.6); color: #fff; }
+    .page-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0a0a0f;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .page-overlay.active { opacity: 1; pointer-events: auto; }
+    .landing {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 25% 30%, rgba(155,89,182,0.14), transparent 60%),
+        radial-gradient(ellipse at 75% 70%, rgba(0,210,255,0.09), transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(155,89,182,0.06), transparent 50%);
+    }
+    .landing::before, .landing::after {
+      content: "";
+      position: absolute;
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: #fff;
+      opacity: 0.25;
+      animation: twinkle 5s ease-in-out infinite;
+    }
+    .landing::before { box-shadow: 120px 40px 0 #fff, 240px 90px 0 #fff, 60px 200px 0 #fff, 300px 160px 0 #fff, 420px 60px 0 #fff, 180px 260px 0 #fff, 380px 230px 0 #fff, 90px 330px 0 #fff, 460px 310px 0 #fff, 320px 380px 0 #fff, 40px 420px 0 #fff, 520px 200px 0 #fff, 200px 60px 0 #fff, 540px 340px 0 #fff; }
+    .landing::after { animation-delay: 2.5s; }
+    @keyframes twinkle { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.45; } }
+    .particle {
+      position: absolute;
+      width: 3px; height: 3px;
+      background: linear-gradient(135deg, #9B59B6, #00D2FF);
+      border-radius: 50%;
+      opacity: 0.25;
+      animation: float linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.25; }
+      90% { opacity: 0.25; }
+      100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+    }
+    .orbit {
+      position: absolute;
+      width: 460px; height: 460px;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: 0.8;
+    }
+    .orbit::before {
+      content: "";
+      position: absolute; inset: 0;
+      border: 1px dashed rgba(155,89,182,0.25);
+      border-radius: 50%;
+      animation: spin 70s linear infinite;
+    }
+    .orbit::after {
+      content: "";
+      position: absolute;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #00D2FF;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 24px #00D2FF;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .landing-content { position: relative; z-index: 2; }
+    .landing-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 100px;
+      background: rgba(155,89,182,0.12);
+      border: 1px solid rgba(155,89,182,0.25);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #9B59B6;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .landing-logo {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: 74px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+      line-height: 1;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+    .landing-logo span {
+      background: linear-gradient(135deg, #9B59B6, #00D2FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .landing-tagline {
+      font-size: 18px;
+      color: #8888aa;
+      margin-bottom: 36px;
+      max-width: 470px;
+      line-height: 1.7;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+    .landing-tagline b { color: #c8c8e0; font-weight: 700; }
+
+    .login-card {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: min(360px, 88vw);
+      padding: 28px 30px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+    .login-card .login-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+    .login-card .login-desc { font-size: 13px; color: #8888aa; margin-bottom: 8px; line-height: 1.6; }
+    .login-status { font-size: 12.5px; color: #00D2FF; font-weight: 600; margin-bottom: 2px; }
+    .login-note {
+      font-size: 12px;
+      color: #d8a24a;
+      background: rgba(216,162,74,0.08);
+      border: 1px solid rgba(216,162,74,0.25);
+      border-radius: 10px;
+      padding: 10px 12px;
+      line-height: 1.5;
+      text-align: left;
+    }
+    .login-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 26px;
+      border-radius: 12px;
+      border: none;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .login-btn.discord { background: #5865F2; color: #fff; }
+    .login-btn.discord:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(88,101,242,0.4); }
+    .login-btn.enter { background: linear-gradient(135deg, #9B59B6, #00D2FF); color: #fff; }
+    .login-btn.enter:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(155,89,182,0.45); }
+    .login-btn.ghost {
+      background: transparent;
+      color: #b8b8c8;
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 13px;
+    }
+    .login-btn.ghost:hover { border-color: #00D2FF; color: #00D2FF; transform: translateY(-2px); }
+
+    .landing-links {
+      position: absolute;
+      bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 1s forwards;
+      z-index: 2;
+    }
+    .landing-links a {
+      color: #8888aa;
+      font-size: 20px;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+    .landing-links a:hover { color: #9B59B6; transform: translateY(-2px); }
+    .landing-links .links-divider { width: 1px; height: 18px; background: rgba(255,255,255,0.12); }
+    .landing-links .owner-chip {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #8888aa;
+      text-transform: uppercase;
+    }
+    .landing-links .owner-chip b { color: #00D2FF; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { to { opacity: 1; } }
+    @media (max-width: 600px) {
+      .landing-logo { font-size: 48px; }
+      .landing-tagline { font-size: 16px; }
+      .orbit { width: 320px; height: 320px; }
+    }
+    @media (max-height: 760px) {
+      .landing { overflow-y: auto; justify-content: flex-start; padding-top: 40px; padding-bottom: 80px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-overlay" id="pageOverlay"></div>
+  <div class="landing" id="particles">
+    <div class="orbit"></div>
+    <div class="landing-content">
+      <div class="landing-badge">MCPE PVP TESTING SERVER</div>
+      <h1 class="landing-logo">MCPE GALAXY<span>.</span></h1>
+      <p class="landing-tagline">Premium PvP testing grounds for <b>Java &amp; Bedrock</b> — earned tiers, live leaderboards and fights that actually count.</p>
+
+      <div class="login-card" id="loginArea">
+        <div id="loginStatus"></div>
+        <div id="loginTitle"></div>
+        <div id="loginDesc"></div>
+        <div id="loginNote" class="login-note"></div>
+        <button class="login-btn discord" id="loginBtn" style="display:none;"><i class="fab fa-discord"></i> Login with Discord</button>
+        <button class="login-btn ghost" id="previewBtn" style="display:none;"><i class="fas fa-eye"></i> Preview without Discord</button>
+        <button class="login-btn enter" id="enterBtn" style="display:none;"><i class="fas fa-arrow-right"></i> Enter Server</button>
+      </div>
+    </div>
+    <div class="landing-links">
+      <span class="owner-chip">Owner <b>Maxxaaaaaaa</b></span>
+      <span class="links-divider"></span>
+      <a href="https://discord.gg/QPFRvPXbX8" target="_blank" title="Join Discord"><i class="fab fa-discord"></i></a>
+      <a href="https://discord.gg/QPFRvPXbX8" target="_blank" title="Server Invite"><i class="fas fa-rocket"></i></a>
+      <a href="mailto:owner@mcpegalaxy.gg" title="Email Owner"><i class="fas fa-envelope"></i></a>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
+  <script>
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (10 + Math.random() * 15) + 's';
+      p.style.animationDelay = (Math.random() * 10) + 's';
+      p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+      container.appendChild(p);
+    }
+
+    function enterSite() {
+      const overlay = document.getElementById('pageOverlay');
+      overlay.classList.add('active');
+      setTimeout(() => { window.location.href = 'main.html'; }, 600);
+    }
+
+    function renderLogin() {
+      const loginBtn = document.getElementById('loginBtn');
+      const previewBtn = document.getElementById('previewBtn');
+      const enterBtn = document.getElementById('enterBtn');
+      const status = document.getElementById('loginStatus');
+      const title = document.getElementById('loginTitle');
+      const desc = document.getElementById('loginDesc');
+      const note = document.getElementById('loginNote');
+
+      const session = getDiscordSession();
+      if (session) {
+        status.textContent = 'Logged in as ' + session.user.username;
+        title.textContent = '';
+        desc.textContent = '';
+        note.textContent = '';
+        enterBtn.style.display = 'inline-flex';
+        return;
+      }
+      status.textContent = '';
+      title.textContent = 'Members only';
+      desc.textContent = 'Sign in with Discord to enter the site.';
+
+      if (MCG_USE_PREVIEW) {
+        note.textContent = 'Discord login is not connected yet, so the site runs in preview mode. The owner needs to add a Client ID in config.js to enable Discord login.';
+        previewBtn.style.display = 'inline-flex';
+      } else {
+        loginBtn.style.display = 'inline-flex';
+        if (window.location.protocol.indexOf('http') !== 0) {
+          note.textContent = 'Note: this page must be served over http(s) for Discord login to work. Opening it as a local file will not redirect correctly.';
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const session = await handleDiscordRedirect();
+      if (session) {
+        enterSite();
+        return;
+      }
+      renderLogin();
+
+      document.getElementById('loginBtn').addEventListener('click', () => {
+        if (MCG_USE_PREVIEW) return;
+        loginWithDiscord();
+      });
+      document.getElementById('previewBtn').addEventListener('click', () => {
+        createPreviewSession();
+        enterSite();
+      });
+      document.getElementById('enterBtn').addEventListener('click', enterSite);
+    });
+  </script>
+</body>
+</html>

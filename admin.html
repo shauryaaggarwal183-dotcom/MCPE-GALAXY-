@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin Panel | MCPE GALAXY</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/g8o468o.png">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+  <!-- LOGIN -->
+  <div class="login-wrap" id="loginView">
+    <div class="login-card">
+      <div class="login-logo">MCPE GALAXY<span>.</span></div>
+      <p class="login-sub">Admin Panel &bull; restricted access</p>
+      <input type="password" class="admin-input" id="loginPass" placeholder="Admin password" autocomplete="off">
+      <div class="login-error" id="loginError"></div>
+      <button class="admin-btn" style="width:100%;" id="loginBtn"><i class="fas fa-lock"></i> Unlock Panel</button>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="admin-shell container" id="adminView" style="display:none;">
+    <div class="admin-nav">
+      <h1>MCPE GALAXY<span>.</span> <span style="font-size:12px; color:#8888aa; letter-spacing:2px;">ADMIN</span></h1>
+      <div class="admin-nav-actions">
+        <a href="main.html" class="admin-btn ghost sm"><i class="fas fa-eye"></i> View site</a>
+        <button class="admin-btn ghost sm" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </div>
+
+    <div class="admin-stats">
+      <div class="admin-stat"><b id="statJava">0</b><span>Java Players</span></div>
+      <div class="admin-stat"><b id="statBedrock">0</b><span>Bedrock Players</span></div>
+      <div class="admin-stat"><b id="statLogs">0</b><span>Log Entries</span></div>
+      <div class="admin-stat"><b id="statTiers">12</b><span>Tier Levels</span></div>
+    </div>
+
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-panel="panel-lb"><i class="fas fa-trophy"></i> Leaderboard</button>
+      <button class="admin-tab" data-panel="panel-logs"><i class="fas fa-scroll"></i> Logs</button>
+      <button class="admin-tab" data-panel="panel-settings"><i class="fas fa-cog"></i> Settings</button>
+    </div>
+
+    <!-- LEADERBOARD PANEL -->
+    <div class="admin-panel active" id="panel-lb">
+      <div class="admin-grid">
+        <div class="admin-card">
+          <h3 id="formTitle"><i class="fas fa-plus" style="color:var(--cyan);"></i> Add Player</h3>
+          <form class="admin-form" id="playerForm">
+            <div class="form-row">
+              <div>
+                <label>Platform</label>
+                <select class="admin-select" id="pPlatform">
+                  <option value="java">Java</option>
+                  <option value="bedrock">Bedrock</option>
+                </select>
+              </div>
+              <div>
+                <label>Trend</label>
+                <select class="admin-select" id="pTrend">
+                  <option value="up">Up ↑</option>
+                  <option value="down">Down ↓</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label>Player Name</label>
+              <input type="text" class="admin-input" id="pName" placeholder="e.g. Zephyr" required>
+            </div>
+            <div class="form-row">
+              <div>
+                <label>Tier</label>
+                <select class="admin-select" id="pTier">
+                  <option value="HT1">HT1 (High S)</option>
+                  <option value="HT2">HT2 (High A)</option>
+                  <option value="HT3">HT3 (High B)</option>
+                  <option value="HT4">HT4 (High C)</option>
+                  <option value="MT1">MT1 (Mid S)</option>
+                  <option value="MT2">MT2 (Mid A)</option>
+                  <option value="MT3">MT3 (Mid B)</option>
+                  <option value="MT4">MT4 (Mid C)</option>
+                  <option value="LT1">LT1 (Low S)</option>
+                  <option value="LT2">LT2 (Low A)</option>
+                  <option value="LT3">LT3 (Low B)</option>
+                  <option value="LT4">LT4 (Low C)</option>
+                </select>
+              </div>
+              <div>
+                <label>Rating</label>
+                <input type="number" class="admin-input" id="pRating" placeholder="1800" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div>
+                <label>Wins</label>
+                <input type="number" class="admin-input" id="pWins" placeholder="120" required>
+              </div>
+              <div>
+                <label>K/D</label>
+                <input type="text" class="admin-input" id="pKd" placeholder="2.50" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <button type="submit" class="admin-btn" id="playerSubmitBtn"><i class="fas fa-save"></i> Save Player</button>
+              <button type="button" class="admin-btn ghost" id="playerCancelBtn" style="display:none;">Cancel edit</button>
+            </div>
+          </form>
+        </div>
+        <div class="admin-card">
+          <h3><i class="fas fa-list" style="color:var(--cyan);"></i> Current Players</h3>
+          <div class="admin-tabs" style="margin:0 0 14px;">
+            <button class="admin-tab active sm" data-lb-list="java"><i class="fab fa-java"></i> Java</button>
+            <button class="admin-tab sm" data-lb-list="bedrock"><i class="fas fa-cube"></i> Bedrock</button>
+          </div>
+          <div class="admin-list" id="playerList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGS PANEL -->
+    <div class="admin-panel" id="panel-logs">
+      <div class="admin-grid">
+        <div class="admin-card">
+          <h3><i class="fas fa-plus" style="color:var(--cyan);"></i> New Log Entry</h3>
+          <form class="admin-form" id="logForm">
+            <div>
+              <label>Date</label>
+              <input type="text" class="admin-input" id="lDate" required>
+            </div>
+            <div>
+              <label>Tag</label>
+              <select class="admin-select" id="lTag">
+                <option value="new">new</option>
+                <option value="feat">feat</option>
+                <option value="fix">fix</option>
+                <option value="launch">launch</option>
+              </select>
+            </div>
+            <div>
+              <label>Title</label>
+              <input type="text" class="admin-input" id="lTitle" placeholder="e.g. Season 2 Starts" required>
+            </div>
+            <div>
+              <label>Details</label>
+              <textarea class="admin-textarea" id="lText" placeholder="What changed..." required></textarea>
+            </div>
+            <button type="submit" class="admin-btn"><i class="fas fa-paper-plane"></i> Post Log + Discord</button>
+          </form>
+          <p style="font-size:11px; color:#55556a; margin-top:10px;">Every entry is saved centrally and sent through the server to the Discord #website-logs channel.</p>
+        </div>
+        <div class="admin-card">
+          <h3><i class="fas fa-scroll" style="color:var(--cyan);"></i> All Log Entries</h3>
+          <div class="admin-list" id="logList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS PANEL -->
+    <div class="admin-panel" id="panel-settings">
+      <div class="admin-grid admin-grid-wide">
+        <div class="admin-card">
+          <h3><i class="fas fa-key" style="color:var(--cyan);"></i> Change Admin Password</h3>
+          <div class="admin-security-note">
+            <p style="font-size:13px;color:#8888aa;line-height:1.7;margin:0 0 12px;">The password is verified and stored on the server (hashed, never in the browser). Changes apply immediately — no restart needed.</p>
+            <div class="admin-security-status"><i class="fas fa-lock"></i> Password is server-side</div>
+          </div>
+          <form class="admin-form" id="passForm">
+            <div>
+              <label>Current Password</label>
+              <input type="password" class="admin-input" id="oldPass" required>
+            </div>
+            <div>
+              <label>New Password</label>
+              <input type="password" class="admin-input" id="newPass" required minlength="4">
+            </div>
+            <button type="submit" class="admin-btn"><i class="fas fa-shield"></i> Update Password</button>
+          </form>
+        </div>
+        <div class="admin-card">
+          <h3><i class="fas fa-paper-plane" style="color:var(--cyan);"></i> Discord Webhook</h3>
+          <p style="font-size:13px; color:#8888aa; line-height:1.7; margin-bottom:14px;">Sends a test embed through the server. The Discord webhook URL never reaches the browser.</p>
+          <button class="admin-btn ghost" id="testWebhookBtn"><i class="fab fa-discord"></i> Send test message</button>
+        </div>
+        <div class="admin-card">
+          <h3><i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> Danger Zone</h3>
+          <p style="font-size:13px; color:#8888aa; line-height:1.7; margin-bottom:14px;">Restores the default sample leaderboard and log entries on this device.</p>
+          <button class="admin-btn danger" id="resetBtn"><i class="fas fa-rotate-left"></i> Reset all data</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="data.js"></script>
+  <script src="webhook.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

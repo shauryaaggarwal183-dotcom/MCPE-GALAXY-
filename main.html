@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MCPE GALAXY - Premium PvP testing server for Java & Bedrock. Tier rankings, live leaderboards, elite gameplay.">
+  <title>MCPE GALAXY | PvP Testing Server</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/g8o468o.png">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-enter {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #0a0a0f; pointer-events: none;
+      animation: pageFade 0.8s ease 0.1s forwards;
+    }
+    @keyframes pageFade { from { opacity: 1; } to { opacity: 0; } }
+  </style>
+</head>
+<body>
+  <div class="page-enter" id="pageEnter"></div>
+
+  <!-- TOPBAR / TICKER -->
+  <div class="topbar">
+    <div class="ticker-track">
+      <span><i class="fas fa-circle"></i> SERVER LIVE &bull; SEASON 1 RANKED &bull; TIER TESTS EVERY FRI &amp; SAT &bull; 120+ PLAYERS RANKED &bull; JAVA &amp; BEDROCK &bull; OWNER: MAXXAAAAAAA &bull; INVITE: discord.gg/QPFRvPXbX8 &bull;</span>
+      <span><i class="fas fa-circle"></i> SERVER LIVE &bull; SEASON 1 RANKED &bull; TIER TESTS EVERY FRI &amp; SAT &bull; 120+ PLAYERS RANKED &bull; JAVA &amp; BEDROCK &bull; OWNER: MAXXAAAAAAA &bull; INVITE: discord.gg/QPFRvPXbX8 &bull;</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">MCPE GALAXY<span class="logo-dot">.</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#leaderboard" class="nav-link">Leaderboard</a>
+        <a href="#tiers" class="nav-link">Tiers</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#logs" class="nav-link">Logs</a>
+        <a href="https://discord.gg/QPFRvPXbX8" target="_blank" class="nav-link nav-cta">Join <i class="fas fa-rocket" style="margin-left: 6px; font-size: 12px;"></i></a>
+        <div class="nav-user" id="navUser"></div>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-particles" id="particles"></div>
+    <div class="orbit"></div>
+    <div class="hero-grid container">
+      <div class="hero-left">
+        <div class="hero-badge"><i class="fas fa-bolt"></i> SEASON 1 IS LIVE</div>
+        <h1 class="hero-title">Fight. Get Ranked. <span class="gradient-text">Dominate.</span></h1>
+        <p class="hero-sub">The MCPE PvP testing hub for Java &amp; Bedrock. Earn your tier in real 1v1 fights — no handouts, no fake ratings.</p>
+        <div class="hero-cta">
+          <a href="https://discord.gg/QPFRvPXbX8" target="_blank" class="btn-primary">Join the Server <i class="fas fa-rocket"></i></a>
+          <a href="#leaderboard" class="btn-outline">Check the Boards <i class="fas fa-trophy"></i></a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><span class="stat-num" data-count="120">0</span><span class="stat-label">Players Ranked</span></div>
+          <div class="stat-item"><span class="stat-num" data-count="12">0</span><span class="stat-label">Tier Levels</span></div>
+          <div class="stat-item"><span class="stat-num" data-count="2">0</span><span class="stat-label">Platforms</span></div>
+          <div class="stat-item"><span class="stat-num" data-count="96">0</span><span class="stat-label">Match Uptime</span></div>
+        </div>
+      </div>
+      <div class="hero-right fade-in">
+        <div class="live-card">
+          <div class="live-card-head">
+            <div>
+              <span class="live-dot"></span>
+              <span class="live-label">LIVE STANDINGS</span>
+            </div>
+            <span class="live-season">S1</span>
+          </div>
+          <div class="live-top3" id="liveTop3">
+            <div class="live-top-row">
+              <span class="live-rank">1</span>
+              <span class="live-avatar">M</span>
+              <span class="live-name">Maxxaaaaaaa</span>
+              <span class="tier-badge tier-ht">HT1</span>
+            </div>
+            <div class="live-top-row">
+              <span class="live-rank">2</span>
+              <span class="live-avatar">Z</span>
+              <span class="live-name">Zephyr</span>
+              <span class="tier-badge tier-ht">HT2</span>
+            </div>
+            <div class="live-top-row">
+              <span class="live-rank">3</span>
+              <span class="live-avatar">K</span>
+              <span class="live-name">KriZz</span>
+              <span class="tier-badge tier-ht">HT3</span>
+            </div>
+          </div>
+          <div class="live-divider"></div>
+          <div class="live-test">
+            <div class="live-test-info">
+              <span class="live-test-label">NEXT TIER TEST</span>
+              <span class="live-test-date">Friday &bull; 8PM UTC</span>
+            </div>
+            <a href="https://discord.gg/QPFRvPXbX8" target="_blank" class="live-test-btn">Book a slot</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERBOARD -->
+  <section class="section" id="leaderboard">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-badge"><i class="fas fa-trophy"></i> LEADERBOARD</span>
+        <h2>Who's on top <span class="gradient-text">this week</span></h2>
+        <p>Separate ladders for Java &amp; Bedrock. Every placement is earned in ranked arenas.</p>
+      </div>
+      <div class="tabs fade-in">
+        <button class="tab-btn active" data-tab="lb-java"><i class="fab fa-java"></i> Java</button>
+        <button class="tab-btn" data-tab="lb-bedrock"><i class="fas fa-cube"></i> Bedrock</button>
+      </div>
+      <div class="tab-panel active" id="lb-java">
+        <div class="lb-card fade-in-group">
+          <div class="lb-table" id="lb-java-body"></div>
+          <p class="lb-note"><i class="fas fa-sync"></i> Refreshes weekly &bull; ratings from ranked matches + tier tests</p>
+        </div>
+      </div>
+      <div class="tab-panel" id="lb-bedrock">
+        <div class="lb-card fade-in-group">
+          <div class="lb-table" id="lb-bedrock-body"></div>
+          <p class="lb-note"><i class="fas fa-sync"></i> Refreshes weekly &bull; ratings from ranked matches + tier tests</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIERS -->
+  <section class="section section-dark" id="tiers">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-badge"><i class="fas fa-ladder"></i> TIER SYSTEM</span>
+        <h2>The climb from <span class="gradient-text">Low C to High S</span></h2>
+        <p>Twelve levels. Three brackets. One simple rule — win your test, take the next step up.</p>
+      </div>
+      <div class="tabs fade-in">
+        <button class="tab-btn active" data-tab="tier-java"><i class="fab fa-java"></i> Java</button>
+        <button class="tab-btn" data-tab="tier-bedrock"><i class="fas fa-cube"></i> Bedrock</button>
+      </div>
+
+      <div class="tab-panel active" id="tier-java">
+        <div class="tier-ladder">
+          <div class="tier-group">
+            <div class="tier-group-head ht">
+              <i class="fas fa-fire"></i>
+              <div>
+                <h3>High Tier</h3>
+                <p>The elite. Fought for, never given.</p>
+              </div>
+            </div>
+            <div class="tier-cards">
+              <div class="tier-card tier-ht"><div class="tier-top"><span class="tier-name">HT1</span><span class="tier-letter">High S</span></div><p>Top of the ladder. Unmatched — known across the galaxy.</p></div>
+              <div class="tier-card tier-ht"><div class="tier-top"><span class="tier-name">HT2</span><span class="tier-letter">High A</span></div><p>One breath from the crown. Consistent and dangerous.</p></div>
+              <div class="tier-card tier-ht"><div class="tier-top"><span class="tier-name">HT3</span><span class="tier-letter">High B</span></div><p>Solid mechanics with real tournament potential.</p></div>
+              <div class="tier-card tier-ht"><div class="tier-top"><span class="tier-name">HT4</span><span class="tier-letter">High C</span></div><p>Breaking into the big bracket. Respect earned.</p></div>
+            </div>
+          </div>
+
+          <div class="tier-group">
+            <div class="tier-group-head mt">
+              <i class="fas fa-bolt"></i>
+              <div>
+                <h3>Mid Tier</h3>
+                <p>Fighting your way through the pack.</p>
+              </div>
+            </div>
+            <div class="tier-cards">
+              <div class="tier-card tier-mt"><div class="tier-top"><span class="tier-name">MT1</span><span class="tier-letter">Mid S</span></div><p>Upper mid. High bracket is in reach.</p></div>
+              <div class="tier-card tier-mt"><div class="tier-top"><span class="tier-name">MT2</span><span class="tier-letter">Mid A</span></div><p>Reliable mechanics, growing fight IQ.</p></div>
+              <div class="tier-card tier-mt"><div class="tier-top"><span class="tier-name">MT3</span><span class="tier-letter">Mid B</span></div><p>Solid foundation, improving every match.</p></div>
+              <div class="tier-card tier-mt"><div class="tier-top"><span class="tier-name">MT4</span><span class="tier-letter">Mid C</span></div><p>Gaining consistency. Keep stacking wins.</p></div>
+            </div>
+          </div>
+
+          <div class="tier-group">
+            <div class="tier-group-head lt">
+              <i class="fas fa-seedling"></i>
+              <div>
+                <h3>Low Tier</h3>
+                <p>Every champion started right here.</p>
+              </div>
+            </div>
+            <div class="tier-cards">
+              <div class="tier-card tier-lt"><div class="tier-top"><span class="tier-name">LT1</span><span class="tier-letter">Low S</span></div><p>Top of the low bracket — one push from mid.</p></div>
+              <div class="tier-card tier-lt"><div class="tier-top"><span class="tier-name">LT2</span><span class="tier-letter">Low A</span></div><p>Building the basics with active sparring.</p></div>
+              <div class="tier-card tier-lt"><div class="tier-top"><span class="tier-name">LT3</span><span class="tier-letter">Low B</span></div><p>New names finding their footing.</p></div>
+              <div class="tier-card tier-lt"><div class="tier-top"><span class="tier-name">LT4</span><span class="tier-letter">Low C</span></div><p>The starting line for every new player.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tier-bedrock">
+        <div class="tier-ladder">
+          <div class="tier-group">
+            <div class="tier-group-head ht">
+              <i class="fas fa-fire"></i>
+              <div>
+                <h3>High Tier</h3>
+                <p>The elite. Fought for, never given.</p>
+              </div>
+            </div>
+            <div class="tier-cards">
+              <div class="tier-card tier-ht"><div class="tier-top"><span class="tier-name">HT1</span><span class="tier-letter">High S</span></div><p>Top of the ladder. Unmatched — known across the galaxy.</p></div>
+              <div class="tier-card tier-ht"><div class="tier-top"><span class="tier-name">HT2</span><span class="tier-letter">High A</span></div><p>One breath from the crown. Consistent and dangerous.</p></div>
+              <div class="tier-card tier-ht"><div class="tier-top"><span class="tier-name">HT3</span><span class="tier-letter">High B</span></div><p>Solid mechanics with real tournament potential.</p></div>
+              <div class="tier-card tier-ht"><div class="tier-top"><span class="tier-name">HT4</span><span class="tier-letter">High C</span></div><p>Breaking into the big bracket. Respect earned.</p></div>
+            </div>
+          </div>
+
+          <div class="tier-group">
+            <div class="tier-group-head mt">
+              <i class="fas fa-bolt"></i>
+              <div>
+                <h3>Mid Tier</h3>
+                <p>Fighting your way through the pack.</p>
+              </div>
+            </div>
+            <div class="tier-cards">
+              <div class="tier-card tier-mt"><div class="tier-top"><span class="tier-name">MT1</span><span class="tier-letter">Mid S</span></div><p>Upper mid. High bracket is in reach.</p></div>
+              <div class="tier-card tier-mt"><div class="tier-top"><span class="tier-name">MT2</span><span class="tier-letter">Mid A</span></div><p>Reliable mechanics, growing fight IQ.</p></div>
+              <div class="tier-card tier-mt"><div class="tier-top"><span class="tier-name">MT3</span><span class="tier-letter">Mid B</span></div><p>Solid foundation, improving every match.</p></div>
+              <div class="tier-card tier-mt"><div class="tier-top"><span class="tier-name">MT4</span><span class="tier-letter">Mid C</span></div><p>Gaining consistency. Keep stacking wins.</p></div>
+            </div>
+          </div>
+
+          <div class="tier-group">
+            <div class="tier-group-head lt">
+              <i class="fas fa-seedling"></i>
+              <div>
+                <h3>Low Tier</h3>
+                <p>Every champion started right here.</p>
+              </div>
+            </div>
+            <div class="tier-cards">
+              <div class="tier-card tier-lt"><div class="tier-top"><span class="tier-name">LT1</span><span class="tier-letter">Low S</span></div><p>Top of the low bracket — one push from mid.</p></div>
+              <div class="tier-card tier-lt"><div class="tier-top"><span class="tier-name">LT2</span><span class="tier-letter">Low A</span></div><p>Building the basics with active sparring.</p></div>
+              <div class="tier-card tier-lt"><div class="tier-top"><span class="tier-name">LT3</span><span class="tier-letter">Low B</span></div><p>New names finding their footing.</p></div>
+              <div class="tier-card tier-lt"><div class="tier-top"><span class="tier-name">LT4</span><span class="tier-letter">Low C</span></div><p>The starting line for every new player.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier-note fade-in">
+        <i class="fas fa-crosshairs"></i>
+        <p>Placements are decided by <strong>1v1 PvP tests</strong> in ranked arenas. Won your test? You move up the same day.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-badge"><i class="fas fa-star"></i> ABOUT</span>
+        <h2>What is <span class="gradient-text">MCPE GALAXY</span>?</h2>
+        <p>A PvP testing hub built for one reason — to find out who's actually good, and give them the rank to prove it.</p>
+      </div>
+      <div class="about-wrap fade-in-group">
+        <div class="about-text">
+          <div class="about-card">
+            <div class="about-icon"><i class="fas fa-crosshairs"></i></div>
+            <h3>The point of the server</h3>
+            <p>No fake elo, no boosted ranks. Every tier on MCPE GALAXY is earned through 1v1 tests against players of your own level. Lose, learn, retest. Simple.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-icon"><i class="fas fa-cubes"></i></div>
+            <h3>Java + Bedrock, same rules</h3>
+            <p>Both platforms get their own ladder and their own tier bracket. Cross-platform players can be ranked on both — completely separate, completely fair.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-icon"><i class="fas fa-clock"></i></div>
+            <h3>Built for testers</h3>
+            <p>Ranked arenas, recorded fights, match tracking and clean fair matchmaking. Your skill does the talking — the system just keeps score.</p>
+          </div>
+        </div>
+        <div class="about-spec">
+          <div class="spec-head">
+            <div class="spec-avatar">M</div>
+            <div>
+              <span class="owner-badge">SERVER OWNER</span>
+              <h3>Maxxaaaaaaa</h3>
+              <p>Founder &amp; head admin</p>
+            </div>
+          </div>
+          <ul class="spec-list">
+            <li><i class="fas fa-crown"></i><span>Owner</span><b>Maxxaaaaaaa</b></li>
+            <li><i class="fas fa-cubes"></i><span>Platforms</span><b>Java + Bedrock</b></li>
+            <li><i class="fas fa-calendar"></i><span>Founded</span><b>July 2026</b></li>
+            <li><i class="fas fa-users"></i><span>Community</span><b>120+ ranked</b></li>
+            <li><i class="fas fa-gamepad"></i><span>Focus</span><b>PvP testing</b></li>
+            <li><i class="fas fa-map-pin"></i><span>Invite</span><b>discord.gg/QPFRvPXbX8</b></li>
+          </ul>
+          <a href="https://discord.gg/QPFRvPXbX8" target="_blank" class="btn-primary btn-sm" style="width:100%;justify-content:center;">Join the server <i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGS -->
+  <section class="section section-dark" id="logs">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-badge"><i class="fas fa-scroll"></i> WEBSITE LOGS</span>
+        <h2>Update <span class="gradient-text">History</span></h2>
+        <p>Every change ships here <b>and</b> straight to our Discord log channel. No silent updates.</p>
+      </div>
+      <div class="log-timeline fade-in-group" id="logTimeline"></div>
+      <div class="log-discord fade-in">
+        <i class="fab fa-discord"></i>
+        <p>All entries are posted live to the server's <b>#website-logs</b> channel on Discord.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN / FOOTER -->
+  <footer id="join">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-badge"><i class="fas fa-rocket"></i> JOIN</span>
+        <h2>Got hands? <span class="gradient-text">Prove them.</span></h2>
+        <p>Join the galaxy, take your tier test, and start the climb.</p>
+      </div>
+      <div class="join-card fade-in-group">
+        <div class="join-info">
+          <div class="join-logo">MCPE GALAXY<span>.</span></div>
+          <p>MCPE PvP testing &bull; Java + Bedrock &bull; Owner: <strong>Maxxaaaaaaa</strong></p>
+        </div>
+        <div class="join-actions">
+          <button class="btn-outline btn-sm" id="copyInvite"><i class="fas fa-copy"></i> Copy invite</button>
+          <a href="https://discord.gg/QPFRvPXbX8" target="_blank" class="btn-primary btn-lg"><i class="fab fa-discord"></i> Join on Discord</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 MCPE GALAXY. Crafted by <b>Maxxaaaaaaa</b>.</p>
+        <div class="footer-links">
+          <a href="https://discord.gg/QPFRvPXbX8" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+          <a href="https://discord.gg/QPFRvPXbX8" target="_blank" title="Invite"><i class="fas fa-rocket"></i></a>
+          <a href="mailto:owner@mcpegalaxy.gg" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="admin.html" title="Admin Panel"><i class="fas fa-user-shield"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
+  <script src="data.js"></script>
+  <script src="webhook.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
